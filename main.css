@@ -1,0 +1,10 @@
+.groundCell {
+  height: 100px;
+  width: 100px;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bold;
+}

@@ -1,5 +1,6 @@
 let mines = [];
 let gridSize = 0;
+let ground = [];
 const generateGrid = function(gridSize) {
   let table = document.createElement("table");
   for (let row = 0; row < gridSize; row++) {
@@ -23,10 +24,7 @@ const generateRow = function(stratCell, gridSize) {
 const generateCell = function(id) {
   let cell = document.createElement("td");
   cell.setAttribute("id", id);
-  cell.setAttribute(
-    "style",
-    "height : 100px; width : 100px; border : 1px solid white; background : black; color : white"
-  );
+  cell.setAttribute("class", "groundCell");
   cell.setAttribute("onmousedown", "performButtonAction(event,this.id)");
   return cell;
 };
@@ -36,42 +34,61 @@ const performButtonAction = function(event, id) {
     return flagCell(id);
   }
   verfiyCell(id);
+  document.getElementById(id).innerText = ground[id];
 };
 
 const isMine = function(id) {
   return mines.includes(id);
 };
 
+const gameLost = function() {
+  alert("you lost game....");
+  document.getElementById("main").setAttribute("disabled", "disabled");
+};
+
+const gameWon = function() {
+  alert("Congrats.. You won");
+  document.getElementById("main").setAttribute("disabled", "disabled");
+};
+
 const verfiyCell = function(id) {
   console.log("is mine", isMine(id));
   if (isMine(+id)) {
-    alert("you lost game....");
+    gameLost();
     return 0;
   }
-  console.log("here assign " + getNeighbourMines(id) + "id is" + id);
-  document.getElementById(id).innerText = getNeighbourMines(+id);
+  ground[id] = getNeighbourMinesCount(+id);
+  if (checkVictory()) {
+    gameWon();
+  }
 };
 
-const getNeighbourMines = function(id) {
-  let neighbours = [
-    id + 1,
-    id - 1,
-    id + gridSize,
-    id - gridSize,
-    id + gridSize + 1,
-    id - gridSize - 1,
-    id + gridSize - 1,
-    id - gridSize + 1
-  ];
+const checkVictory = function() {
+  return !ground.filter(value => value == "e").length;
+};
+
+const getNeighbourMinesCount = function(id) {
+  let neighbours = getValidatedNeighbours(id);
   return neighbours.reduce((count, cell) => count + mines.includes(+cell), 0);
 };
 
+const getValidatedNeighbours = function(id) {
+  let neighbours = [id + gridSize, id - gridSize];
+  if (Math.floor(id / 5) == Math.floor((id + 1) / 5)) {
+    neighbours.push(id + 1, id + 6, id - 4);
+  }
+  if (Math.floor(id / 5) == Math.floor((id - 1) / 5)) {
+    neighbours.push(id - 1, id - 6, id + 4);
+  }
+  return neighbours;
+};
+
 const flagCell = function(id) {
-  alert("right button clicked");
+  document.getElementById(id).innerText = "f";
 };
 
 const startGame = function(groundSize, numberOfMines) {
-  // ground = new Array(groundSize).fill(0);
+  ground = new Array(groundSize * groundSize).fill("e");
   gridSize = groundSize;
   for (let mine = 0; mine < numberOfMines; mine++) {
     let mineLocation;
@@ -79,6 +96,7 @@ const startGame = function(groundSize, numberOfMines) {
       mineLocation = Math.floor(Math.random() * (groundSize * groundSize));
     } while (mines.includes(mineLocation));
     mines.push(mineLocation);
+    ground[mineLocation] = "m";
   }
-  generateGrid(5);
+  generateGrid(groundSize);
 };
