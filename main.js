@@ -87,7 +87,10 @@ const flagCell = function(id) {
   document.getElementById(id).innerText = "f";
 };
 
-const startGame = function(groundSize, numberOfMines) {
+const startGame = function() {
+  document.getElementById("tableData").setAttribute("visibility", "hidden");
+  const groundSize = +document.getElementById("groundSize").value;
+  const numberOfMines = +document.getElementById("numberOfMines").value;
   ground = new Array(groundSize * groundSize).fill("e");
   gridSize = groundSize;
   for (let mine = 0; mine < numberOfMines; mine++) {
