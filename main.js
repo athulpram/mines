@@ -100,3 +100,7 @@ const startGame = function(groundSize, numberOfMines) {
   }
   generateGrid(groundSize);
 };
+
+window.onload(() => {
+  startGame(5, 10);
+});
