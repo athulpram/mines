@@ -1,10 +1,92 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
 .groundCell {
   height: 100px;
   width: 100px;
   border: 1px solid white;
-  background: black;
+  background: #0f0f0f;
   color: white;
   text-align: center;
   font-family: sans-serif;
   font-weight: bold;
+}
+.table-data-before-start {
+  visibility: visible;
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+
+  flex-direction: column;
+  background: #0f0f0f;
+  border-radius: 10px;
+  width: 40%;
+  height: 60%;
+}
+
+.table-data-after-start {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input {
+  width: 90%;
+  height: 10%;
+  border-radius: 5px;
+  border: none;
+  background: none;
+  color: white;
+  border-bottom: 1px solid white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.mines-heading {
+  color: white;
+  font-family: sans-serif;
+}
+
+.text-input:focus {
+  outline: none;
+  border-bottom: 1px solid #39a0ed;
+}
+
+.start-btn {
+  width: 90%;
+  height: 10%;
+
+  border-radius: 7px;
+  border: none;
+  color: white;
+  font-size: 16px;
+
+  background: #39a0ed;
+}
+
+.mines-data {
+  margin-left: 100px;
+  color: #6153cc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: sans-serif;
+  font-size: 24px;
+
+  width: 20%;
+  height: 80%;
+
+  border-left: 2px solid black;
 }

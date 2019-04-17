@@ -6,11 +6,29 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <div id="main"><table id="table"></table></div>
-    <div id="tableData">
-      <input type="number" id="groundSize" placeholder="side size of grid" />
-      <input type="number" id="numberOfMines" placeholder="side size of grid" />
-      <button onclick="startGame()">Start Game</button>
+    <div id="main" class="main">
+      <div id="minesTable">
+        <table id="table"></table>
+      </div>
+      <div id="minesData"></div>
+      <div id="tableData">
+        <h2 class="mines-heading">Mines</h2>
+        <input
+          type="number"
+          class="text-input"
+          id="groundSize"
+          placeholder="side size of grid"
+          required
+        />
+        <input
+          type="number"
+          id="numberOfMines"
+          class="text-input"
+          placeholder="Number Of Mines"
+          required
+        />
+        <button onclick="startGame()" class="start-btn">Start Game</button>
+      </div>
     </div>
   </body>
 </html>

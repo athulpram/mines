@@ -9,8 +9,29 @@ const generateGrid = function(gridSize) {
   table.setAttribute("id", "table");
   table.setAttribute("style", "border :1px solid black");
   document
-    .getElementById("main")
+    .getElementById("minesTable")
     .replaceChild(table, document.getElementById("table"));
+  showGameData();
+};
+
+const showGameData = function() {
+  const dataBoard = document.createElement("div");
+  const mineNumberView = document.createElement("div");
+
+  const mineNumberViewTitle = document.createElement("span");
+  mineNumberViewTitle.innerText = "Mines  ";
+
+  const minesNumberViewCount = document.createElement("span");
+  minesNumberViewCount.innerText = +mines.length;
+
+  mineNumberView.appendChild(mineNumberViewTitle);
+  mineNumberView.appendChild(minesNumberViewCount);
+
+  dataBoard.appendChild(mineNumberView);
+
+  document.getElementById("minesData").innerHTML = "";
+  document.getElementById("minesData").appendChild(dataBoard);
+  document.getElementById("minesData").className = "mines-data";
 };
 
 const generateRow = function(stratCell, gridSize) {
@@ -88,7 +109,7 @@ const flagCell = function(id) {
 };
 
 const startGame = function() {
-  document.getElementById("tableData").setAttribute("visibility", "hidden");
+  document.getElementById("tableData").className = "table-data-after-start";
   const groundSize = +document.getElementById("groundSize").value;
   const numberOfMines = +document.getElementById("numberOfMines").value;
   ground = new Array(groundSize * groundSize).fill("e");
@@ -105,5 +126,5 @@ const startGame = function() {
 };
 
 window.onload = () => {
-  startGame(5, 10);
+  document.getElementById("tableData").className = "table-data-before-start";
 };
