@@ -63,13 +63,13 @@ const isMine = function(id) {
 };
 
 const gameLost = function() {
-  alert("you lost game....");
-  document.getElementById("main").setAttribute("disabled", "disabled");
+  document.getElementById("gameOverMessage").style.visibility = "visible";
+  document.getElementById("popupMessage").innerText = "You have lost the Game";
 };
 
 const gameWon = function() {
-  alert("Congrats.. You won");
-  document.getElementById("main").setAttribute("disabled", "disabled");
+  document.getElementById("gameOverMessage").style.visibility = "visible";
+  document.getElementById("popupMessage").innerText = "You have won the Game";
 };
 
 const verfiyCell = function(id) {
